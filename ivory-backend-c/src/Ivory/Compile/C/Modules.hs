@@ -63,7 +63,7 @@ renderHdr s unitname = displayS (render maxWidth guardedHeader) ""
                       <+> guardName
   botGuard        = text "#endif" <+> text "/*" <+> guardName <+> text "*/\n"
   unitname'       = map (\c -> if c == '-' then '_' else c) unitname
-  guardName       = text "__" <> text (toUpper <$> unitname') <> text "_H__"
+  guardName       = text "__" `mappend` text (toUpper <$> unitname') `mappend` text "_H__"
   topExternC      = stack $ text <$> [ "#ifdef __cplusplus"
                                      , "extern \"C\" {"
                                      , "#endif"]
